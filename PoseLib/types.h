@@ -31,7 +31,7 @@
 #include <Eigen/Dense>
 #include <vector>
 
-namespace pose_lib {
+namespace poselib {
 
 struct CameraPose {
     Eigen::Matrix3d R;
@@ -40,4 +40,4 @@ struct CameraPose {
 };
 
 typedef std::vector<CameraPose> CameraPoseVector;
-} // namespace pose_lib
+} // namespace poselib

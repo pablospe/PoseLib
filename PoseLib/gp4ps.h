@@ -32,7 +32,7 @@
 #include <Eigen/Dense>
 #include <vector>
 
-namespace pose_lib {
+namespace poselib {
 
 // Solves for camera pose such that: scale*p+lambda*x = R*X+t
 // Re-implementation of the gP4P solver from
@@ -41,4 +41,4 @@ namespace pose_lib {
 int gp4ps(const std::vector<Eigen::Vector3d> &p, const std::vector<Eigen::Vector3d> &x,
           const std::vector<Eigen::Vector3d> &X, std::vector<CameraPose> *output);
 
-} // namespace pose_lib
+} // namespace poselib

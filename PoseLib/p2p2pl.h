@@ -31,7 +31,7 @@
 #include "types.h"
 #include <Eigen/Dense>
 
-namespace pose_lib {
+namespace poselib {
 
 // Absolute pose from two point-point and two point-line constraints.
 //    lambda * xp = R*Xp + t    and    lambda * x = R*(X + mu*V) + t
@@ -40,4 +40,4 @@ namespace pose_lib {
 int p2p2pl(const std::vector<Eigen::Vector3d> &xp, const std::vector<Eigen::Vector3d> &Xp,
            const std::vector<Eigen::Vector3d> &x, const std::vector<Eigen::Vector3d> &X,
            const std::vector<Eigen::Vector3d> &V, CameraPoseVector *output);
-}; // namespace pose_lib
+}; // namespace poselib

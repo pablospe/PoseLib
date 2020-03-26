@@ -30,7 +30,7 @@
 #include "types.h"
 #include <Eigen/Dense>
 
-namespace pose_lib {
+namespace poselib {
 
 // Upright absolute pose from four point-line constraints, i.e.
 //   lambda * x = R * (X + mu * V) + t
@@ -38,4 +38,4 @@ namespace pose_lib {
 //    Sweeney et al., Solving for Relative Pose with a Partially Known Rotation is a Quadratic Eigenvalue Problem, 3DV 2014
 int up4pl(const std::vector<Eigen::Vector3d> &x, const std::vector<Eigen::Vector3d> &X,
           const std::vector<Eigen::Vector3d> &V, CameraPoseVector *output);
-}; // namespace pose_lib
+}; // namespace poselib

@@ -3,7 +3,7 @@
 #include <chrono>
 #include <iomanip>
 #include <iostream>
-namespace pose_lib {
+namespace poselib {
 
 template <typename Solver>
 BenchmarkResult benchmark(int n_problems, const ProblemOptions &options, double tol = 1e-6) {
@@ -60,7 +60,7 @@ BenchmarkResult benchmark(int n_problems, const ProblemOptions &options, double 
   return result;
 }
 
-} // namespace pose_lib
+} // namespace poselib
 
 void print_runtime(double runtime_ns) {
   if (runtime_ns < 1e3) {
@@ -74,7 +74,7 @@ void print_runtime(double runtime_ns) {
   }
 }
 
-void display_result(std::vector<pose_lib::BenchmarkResult> &results) {
+void display_result(std::vector<poselib::BenchmarkResult> &results) {
 
   int w = 13;
   // display header
@@ -90,7 +90,7 @@ void display_result(std::vector<pose_lib::BenchmarkResult> &results) {
 
   int prec = 6;
 
-  for (pose_lib::BenchmarkResult &result : results) {
+  for (poselib::BenchmarkResult &result : results) {
     double num_tests = static_cast<double>(result.instances_);
     double solutions = result.solutions_ / num_tests;
     double valid_sols = result.valid_solutions_ / static_cast<double>(result.solutions_) * 100.0;
@@ -109,9 +109,9 @@ void display_result(std::vector<pose_lib::BenchmarkResult> &results) {
 
 int main() {
 
-  std::vector<pose_lib::BenchmarkResult> results;
+  std::vector<poselib::BenchmarkResult> results;
 
-  pose_lib::ProblemOptions options;
+  poselib::ProblemOptions options;
   // options.camera_fov_ = 45; // Narrow
   // options.camera_fov_ = 75; // Medium
   options.camera_fov_ = 120; // Wide
@@ -119,104 +119,104 @@ int main() {
   double tol = 1e-6;
 
   // P3P
-  pose_lib::ProblemOptions p3p_opt = options;
+  poselib::ProblemOptions p3p_opt = options;
   p3p_opt.n_point_point_ = 3;
   p3p_opt.n_point_line_ = 0;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverP3P>(1e5, p3p_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverP3P>(1e5, p3p_opt, tol));
 
   // gP3P
-  pose_lib::ProblemOptions gp3p_opt = options;
+  poselib::ProblemOptions gp3p_opt = options;
   gp3p_opt.n_point_point_ = 3;
   gp3p_opt.n_point_line_ = 0;
   gp3p_opt.generalized_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverGP3P>(1e4, gp3p_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverGP3P>(1e4, gp3p_opt, tol));
 
   // gP4Ps
-  pose_lib::ProblemOptions gp4p_opt = options;
+  poselib::ProblemOptions gp4p_opt = options;
   gp4p_opt.n_point_point_ = 4;
   gp4p_opt.n_point_line_ = 0;
   gp4p_opt.generalized_ = true;
   gp4p_opt.unknown_scale_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverGP4PS>(1e4, gp4p_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverGP4PS>(1e4, gp4p_opt, tol));
 
   // P4Pf
-  pose_lib::ProblemOptions p4pf_opt = options;
+  poselib::ProblemOptions p4pf_opt = options;
   p4pf_opt.n_point_point_ = 4;
   p4pf_opt.n_point_line_ = 0;
   p4pf_opt.unknown_focal_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverP4PF>(1e4, p4pf_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverP4PF>(1e4, p4pf_opt, tol));
 
   // P2P2L
-  pose_lib::ProblemOptions p2p2l_opt = options;
+  poselib::ProblemOptions p2p2l_opt = options;
   p2p2l_opt.n_point_point_ = 2;
   p2p2l_opt.n_point_line_ = 2;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverP2P2PL>(1e3, p2p2l_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverP2P2PL>(1e3, p2p2l_opt, tol));
 
   // P6LP
-  pose_lib::ProblemOptions p6lp_opt = options;
+  poselib::ProblemOptions p6lp_opt = options;
   p6lp_opt.n_line_point_ = 6;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverP6LP>(1e4, p6lp_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverP6LP>(1e4, p6lp_opt, tol));
 
   // P5LP Radial
-  pose_lib::ProblemOptions p5lp_radial_opt = options;
+  poselib::ProblemOptions p5lp_radial_opt = options;
   p5lp_radial_opt.n_line_point_ = 5;
   p5lp_radial_opt.radial_lines_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverP5LP_Radial>(1e5, p5lp_radial_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverP5LP_Radial>(1e5, p5lp_radial_opt, tol));
 
   // P2P1LL
-  pose_lib::ProblemOptions p2p1ll_opt = options;
+  poselib::ProblemOptions p2p1ll_opt = options;
   p2p1ll_opt.n_point_point_ = 2;
   p2p1ll_opt.n_line_line_ = 1;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverP2P1LL>(1e4, p2p1ll_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverP2P1LL>(1e4, p2p1ll_opt, tol));
 
   // P1P2LL
-  pose_lib::ProblemOptions p1p2ll_opt = options;
+  poselib::ProblemOptions p1p2ll_opt = options;
   p1p2ll_opt.n_point_point_ = 1;
   p1p2ll_opt.n_line_line_ = 2;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverP1P2LL>(1e4, p1p2ll_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverP1P2LL>(1e4, p1p2ll_opt, tol));
 
   // P3LL
-  pose_lib::ProblemOptions p3ll_opt = options;
+  poselib::ProblemOptions p3ll_opt = options;
   p3ll_opt.n_line_line_ = 3;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverP3LL>(1e4, p3ll_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverP3LL>(1e4, p3ll_opt, tol));
 
   // uP2P
-  pose_lib::ProblemOptions up2p_opt = options;
+  poselib::ProblemOptions up2p_opt = options;
   up2p_opt.n_point_point_ = 2;
   up2p_opt.n_point_line_ = 0;
   up2p_opt.upright_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverUP2P>(1e6, up2p_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverUP2P>(1e6, up2p_opt, tol));
 
   // uGP2P
-  pose_lib::ProblemOptions ugp2p_opt = options;
+  poselib::ProblemOptions ugp2p_opt = options;
   ugp2p_opt.n_point_point_ = 2;
   ugp2p_opt.n_point_line_ = 0;
   ugp2p_opt.upright_ = true;
   ugp2p_opt.generalized_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverUGP2P>(1e6, ugp2p_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverUGP2P>(1e6, ugp2p_opt, tol));
 
   // uGP3Ps
-  pose_lib::ProblemOptions ugp3ps_opt = options;
+  poselib::ProblemOptions ugp3ps_opt = options;
   ugp3ps_opt.n_point_point_ = 3;
   ugp3ps_opt.n_point_line_ = 0;
   ugp3ps_opt.upright_ = true;
   ugp3ps_opt.generalized_ = true;
   ugp3ps_opt.unknown_scale_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverUGP3PS>(1e6, ugp3ps_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverUGP3PS>(1e6, ugp3ps_opt, tol));
 
   // uP1P2L
-  pose_lib::ProblemOptions up1p2l_opt = options;
+  poselib::ProblemOptions up1p2l_opt = options;
   up1p2l_opt.n_point_point_ = 1;
   up1p2l_opt.n_point_line_ = 2;
   up1p2l_opt.upright_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverUP1P2PL>(1e5, up1p2l_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverUP1P2PL>(1e5, up1p2l_opt, tol));
 
   // uP4L
-  pose_lib::ProblemOptions up4l_opt = options;
+  poselib::ProblemOptions up4l_opt = options;
   up4l_opt.n_point_point_ = 0;
   up4l_opt.n_point_line_ = 4;
   up4l_opt.upright_ = true;
-  results.push_back(pose_lib::benchmark<pose_lib::SolverUP4PL>(1e3, up4l_opt, tol));
+  results.push_back(poselib::benchmark<poselib::SolverUP4PL>(1e3, up4l_opt, tol));
 
   display_result(results);
 

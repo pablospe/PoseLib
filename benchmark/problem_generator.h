@@ -4,7 +4,7 @@
 #include <PoseLib/types.h>
 #include <vector>
 
-namespace pose_lib {
+namespace poselib {
 
 struct ProblemInstance {
 public:
@@ -81,4 +81,4 @@ void set_random_pose(CameraPose &pose, bool upright);
 
 void generate_problems(int n_problems, std::vector<ProblemInstance> *problem_instances, const ProblemOptions &options);
 
-}; // namespace pose_lib
+}; // namespace poselib

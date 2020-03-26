@@ -28,7 +28,7 @@
 
 #include "up4pl.h"
 
-int pose_lib::up4pl(const std::vector<Eigen::Vector3d> &x, const std::vector<Eigen::Vector3d> &X,
+int poselib::up4pl(const std::vector<Eigen::Vector3d> &x, const std::vector<Eigen::Vector3d> &X,
                     const std::vector<Eigen::Vector3d> &V, CameraPoseVector *output) {
 
     Eigen::Matrix<double, 4, 4> M, C, K;
@@ -98,7 +98,7 @@ int pose_lib::up4pl(const std::vector<Eigen::Vector3d> &x, const std::vector<Eig
         if (std::abs(s(i).imag()) > 1e-8)
             continue;
 
-        pose_lib::CameraPose pose;
+        poselib::CameraPose pose;
         double q = s(i).real();
         double q2 = q * q;
         double cq = (1 - q2) / (1 + q2);

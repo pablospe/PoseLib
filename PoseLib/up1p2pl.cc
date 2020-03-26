@@ -29,9 +29,9 @@
 #include "up1p2pl.h"
 #include "univariate.h"
 
-int pose_lib::up1p2pl(const std::vector<Eigen::Vector3d> &xp, const std::vector<Eigen::Vector3d> &Xp,
-                      const std::vector<Eigen::Vector3d> &x, const std::vector<Eigen::Vector3d> &X0,
-                      const std::vector<Eigen::Vector3d> &V, CameraPoseVector *output) {
+int poselib::up1p2pl(const std::vector<Eigen::Vector3d> &xp, const std::vector<Eigen::Vector3d> &Xp,
+                     const std::vector<Eigen::Vector3d> &x, const std::vector<Eigen::Vector3d> &X0,
+                     const std::vector<Eigen::Vector3d> &V, CameraPoseVector *output) {
 
     Eigen::Matrix<double, 3, 2> X;
     X << X0[0] - Xp[0], X0[1] - Xp[0];

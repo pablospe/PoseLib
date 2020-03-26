@@ -29,7 +29,7 @@
 #include "gp4ps.h"
 #include <re3q3/re3q3.h>
 
-namespace pose_lib {
+namespace poselib {
 
 // Solves for camera pose such that: scale*p+lambda*x = R*X+t
 int gp4ps(const std::vector<Eigen::Vector3d> &p, const std::vector<Eigen::Vector3d> &x,
@@ -69,4 +69,4 @@ int gp4ps(const std::vector<Eigen::Vector3d> &p, const std::vector<Eigen::Vector
     return n_sols;
 }
 
-} // namespace pose_lib
+} // namespace poselib
